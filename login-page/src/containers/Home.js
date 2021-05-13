@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <div className="Home">
       <div className="lander">
-        <h1>Login</h1>
-        <p className="text-muted">Creating an example login page</p>
+        <h1>Totally Not Indeed</h1>
+        <p className="text-muted">Creating an example job board</p>
       </div>
     </div>
   );

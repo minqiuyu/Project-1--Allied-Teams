@@ -16,7 +16,10 @@ function App() {
         </LinkContainer>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Nav activeKey={window.location.pathname}>
+          <Nav activeKey="/home">
+            <LinkContainer to="/jobboard">
+              <Nav.Link>Board</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/signup">
               <Nav.Link>Signup</Nav.Link>
             </LinkContainer>
