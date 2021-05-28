@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
@@ -14,8 +15,10 @@ class Header extends Component {
         <hr />
         <h5>
           <i>presents</i>
+          <p>change</p>
         </h5>
         <h1>React + Django Job Board</h1>
+        <p><Link to="/register">Register</Link></p>
       </div>
     );
   }

@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from jobs import views
+from django.urls.conf import include
+from job_board.jobs import views
 from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^api/jobs/$', views.jobs_list),
     re_path(r'^api/jobs/([0-9])$', views.jobs_detail),
+    path('', include('accounts.url')),
 ]
