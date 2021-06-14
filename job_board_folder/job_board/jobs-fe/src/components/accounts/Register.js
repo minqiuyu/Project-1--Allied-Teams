@@ -1,4 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { register } from "../../actions/auth";
+import { createMessage } from '../../actions/messages';
 
 export class Register extends Component {
     state = {
@@ -10,9 +15,13 @@ export class Register extends Component {
         password2: '',
     }
 
+    static propTypes = {
+        register: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool,
+      };
 
     onSubmit = (e) => {
-        e.preventDefault();
+       // e.preventDefault();
         const { username, email, first_name, last_name, password, password2 } = this.state;
         if (password !== password2) {
           this.props.createMessage({ passwordNotMatch: 'Passwords do not match' });
@@ -24,34 +33,32 @@ export class Register extends Component {
             first_name,
             last_name,
           };
-          this.props.register(newUser);
+          this.props.register(newUser)
         }
       };
     
-    onChange = e => this.setState({ [e.target.name]: e.target.value})
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value})
 
     render() {
-        const {username, email, first_name, last_name, password, password2} =
-        this.state;
+      if (this.props.isAuthenticated) {
+        return <Redirect to="/" />;
+      }
+        const {username, email, first_name, last_name, password, password2} = this.state;
         return (
         <div>
             <form onSubmit={this.onSubmit}>
                 <label>Username</label>
                 <input type="text" name="username" onChange={this.onChange}
-                value={username}
-                />
+                value={username} />
                 <label>Email</label>
                 <input type="email" name="email" onChange={this.onChange}
-                value={email}
-                />
+                value={email} />
                 <label>First Name</label>
                 <input type="text" name="first_name" onChange={this.onChange} 
-                value={first_name}
-                />
+                value={first_name} />
                 <label>Last Name</label>
                 <input type="text" name="last_name" onChange={this.onChange}
-                value={last_name}
-                />
+                value={last_name} />
               <label>Password</label>
               <input
                 type="password" name="password" onChange={this.onChange} value={password}
@@ -63,10 +70,16 @@ export class Register extends Component {
               <button type="submit">
                 Register
               </button>
+              <p>Already have an account? <Link to="/login">Login</Link></p>
             </form>
         </div>
-            )
+            );
     }
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+  });
+  
+export default connect(mapStateToProps, { register, createMessage })(Register);
+//export default Register;

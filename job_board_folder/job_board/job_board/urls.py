@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.urls.conf import include
-from job_board.jobs import views
+from jobs import views
 from django.conf.urls import url
 
 urlpatterns = [

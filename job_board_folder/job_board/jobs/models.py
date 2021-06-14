@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -9,5 +10,6 @@ class Job(models.Model):
     description = models.CharField(max_length=750)
     registrationDate = models.DateField("Registration Date", auto_now_add=True)
 
+    owner = models.ForeignKey(User, related_name="owners", on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.name
