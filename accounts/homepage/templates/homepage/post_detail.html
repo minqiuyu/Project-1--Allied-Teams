@@ -1,0 +1,16 @@
+{% extends "homepage/base.html" %}
+{% block content %}
+	<div>
+	<div>
+	<a href="#">{{ object.author }}</a>
+	{{ object.date_posted }}
+	{% if object.author == user %}
+		<br><br>
+		<a href="{% url 'post-update' object.id %}">Update</a>
+		<br>
+		<a href="{% url 'post-delete' object.id %}">Delete</a>
+	{% endif %}
+	</div>
+	<h2>{{ object.title }}</h2>
+	<p>{{ object.content }}</p>
+{% endblock content %}
